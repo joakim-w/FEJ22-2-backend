@@ -1,0 +1,14 @@
+{
+  "name": "4-server",
+  "version": "1.0.0",
+  "description": "En enkel webbserver med node.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Joakim Wahlström",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}

@@ -12,5 +12,16 @@
   <p>this is the homepage</p>
   <a href="about">about</a>
   
+  <script>
+    fetch('http://localhost:9999/api/messages')
+      .then(res => res.json())
+      .then(data => {
+        data.forEach(message => {
+          document.body.innerHTML += `
+          <h2>${message.title}</h2>
+          `
+        })
+      })
+  </script>
 </body>
 </html>

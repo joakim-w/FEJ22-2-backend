@@ -12,31 +12,60 @@ const server = http.createServer((req, res) => {
   //   res.end(data)
   // })
   // console.log(req.url)
-  res.setHeader('Content-type', 'text/html');
+  // res.setHeader('Content-type', 'text/html');
 
-  let fileName;
-  switch(req.url) {
-    case '/':
-      fileName = 'index.html'
-      res.statusCode = 200;
-      break;
-    case '/about':
-      fileName = 'about.html'
-      res.statusCode = 200;
-      break;
-    default:
-      fileName = '404.html'
-      res.statusCode = 404;
+  // let fileName;
+  // switch(req.url) {
+  //   case '/':
+  //     fileName = 'index.html'
+  //     res.statusCode = 200;
+  //     break;
+  //   case '/about':
+  //     fileName = 'about.html'
+  //     res.statusCode = 200;
+  //     break;
+  //   case '/about-us':
+  //     res.statusCode = 301;
+  //     res.setHeader('Location', '/about');
+  //     res.end();
+  //     break;
+  //   default:
+  //     fileName = '404.html'
+  //     res.statusCode = 404;
+  // }
+
+  // let filePath = path.join(__dirname, 'pages', fileName)
+
+  // fs.readFile(filePath, (err, data) => {
+  //   if(err) {
+  //     console.log(err)
+  //     res.end()
+  //   }
+  //   res.end(data)
+  // })
+
+  let filePath
+  console.log(req.url)
+  if(req.url === '/') {
+    filePath = path.join(__dirname, 'pages', 'index.html')
+  } else {
+    filePath = path.join(__dirname, 'pages', req.url + '.html')
   }
+  fs.readFile(filePath, (err,data) => {
+    if(err && err.code === 'ENOENT') {
 
-  let filePath = path.join(__dirname, 'pages', fileName)
+        fs.readFile(path.join(__dirname, 'pages', '404.html'), (err, data) => {
+        if(err) {
+          console.log(err)
+          res.end()
+        }
+        res.end(data)
+      })
 
-  fs.readFile(filePath, (err, data) => {
-    if(err) {
-      console.log(err)
-      res.end()
+    } 
+    else {
+      res.end(data)
     }
-    res.end(data)
   })
 
 })

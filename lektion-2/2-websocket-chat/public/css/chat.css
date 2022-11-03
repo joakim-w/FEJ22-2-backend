@@ -48,3 +48,8 @@
   border-top: 2px solid #b4b4b4;
   padding: 1rem 2rem 1rem 2rem;
 }
+
+.inline-feedback {
+  color: #939393;
+  margin: 1rem 0;
+}

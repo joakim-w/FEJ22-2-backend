@@ -65,3 +65,7 @@ body {
   border-radius: 100vh;
   border: 2px solid var(--clr-chat-bg);
 }
+
+.d-none {
+  display: none;
+}

@@ -20,16 +20,17 @@
         <div class="chat-window">
           <div class="messages">
 
-            <div class="single-message">
+            <!-- <div class="single-message">
               <p class="single-message_name">Namnet på anvädaren</p>
               <p class="single-message_msg">Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
             </div>
             <div class="single-message right">
               <p class="single-message_name">Namnet på anvädaren</p>
               <p class="single-message_msg">Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
-            </div>
-
+            </div> -->
+            <!-- <p class="inline-feedback">Joakim has entered the chat</p> -->
           </div>
+          <p id="feedback" class="d-none">Joakim is typing...</p>
         </div>
         <form id="chatForm" class="chat-form">
           <div class="iput-group">
@@ -43,7 +44,7 @@
 
   </div>
   
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.4.0/purify.min.js" integrity="sha512-/hVAZO5POxCKdZMSLefw30xEVwjm94PAV9ynjskGbIpBvHO9EBplEcdUlBdCKutpZsF+La8Ag4gNrG0gAOn3Ig==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="/socket.io/socket.io.js"></script>
   <script src="script.js"></script>
 </body>

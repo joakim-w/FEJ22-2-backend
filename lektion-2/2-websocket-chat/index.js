@@ -18,8 +18,13 @@ io.on('connection', socket => {
 
   // console.log(socket.id)
 
-  socket.on('new-user', userName => {
-    console.log(userName + ' has entered the chat')
+  socket.on('new-connection', userName => {
+    // console.log(userName + ' has entered the chat')
+    socket.broadcast.emit('new-user', userName);
+  })
+
+  socket.on('message', data => {
+    io.sockets.emit('new-message', data)
   })
 
 })

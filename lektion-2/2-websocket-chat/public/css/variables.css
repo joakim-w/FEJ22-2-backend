@@ -1,0 +1,9 @@
+:root {
+  --clr-main-bg: #dde6e6;
+  --clr-card-bg: #ffffff;
+  --clr-primary-100: hsl(180, 23%, 35%);
+  --clr-primary-200: hsl(180, 23%, 29%);
+  --clr-primary-300: hsl(180, 23%, 23%);
+
+  --border-radius: 1rem
+}

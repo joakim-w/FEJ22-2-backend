@@ -4,6 +4,8 @@ const messages = document.querySelector('.messages');
 const chatForm = document.querySelector('#chatForm');
 const chatMessage = document.querySelector('#chatMessage');
 const chatWindow = document.querySelector('.chat-window');
+const feedback = document.querySelector('#feedback');
+const logoutBtn = document.querySelector('#logout');
 
 
 const userName = new URLSearchParams(window.location.search).get('name');
@@ -13,14 +15,15 @@ socket.on('connect', () => {
   socket.emit('new-connection', userName);
 })
 
-socket.on('new-user', userName => {
-//  messages.innerHTML += `<p class="inline-feedback">${DOMPurify.sanitize(userName)} has entered the chat</p>`
+socket.on('user', message => {
+  //  messages.innerHTML += `<p class="inline-feedback">${DOMPurify.sanitize(userName)} has entered the chat</p>`
   const inlineFeedback = document.createElement('p');
   inlineFeedback.classList = 'inline-feedback';
-  inlineFeedback.innerText = userName + ' has entered the chat!'
-
+  inlineFeedback.innerText = message
+  
   messages.appendChild(inlineFeedback);
-})
+  chatWindow.scrollTop = chatWindow.scrollHeight;
+  })
 
 
 socket.on('new-message', data => {
@@ -44,11 +47,17 @@ socket.on('new-message', data => {
 
   messages.appendChild(message);
 
-
+  feedback.innerText = ''
+  feedback.classList.add('d-none');
   chatWindow.scrollTop = chatWindow.scrollHeight;
 
 })
 
+
+socket.on('typing', name => {
+  feedback.innerText = `${name} is typing a message...`
+  feedback.classList.remove('d-none');
+})
 
 const submitHandler = e => {
   e.preventDefault()
@@ -64,3 +73,11 @@ const submitHandler = e => {
 }
 
 chatForm.addEventListener('submit', submitHandler);
+
+chatMessage.addEventListener('keypress', () => {
+  socket.emit('typing', userName);
+})
+
+logoutBtn.addEventListener('click', () => {
+  socket.emit('manual-logout')
+})

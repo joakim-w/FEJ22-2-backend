@@ -3,6 +3,8 @@ const http = require('http');
 const path = require('path');
 const socket = require('socket.io');
 
+const { userConnect, userDisconnect } = require('./users')
+
 const app = express();
 const server = http.createServer(app);
 
@@ -20,11 +22,28 @@ io.on('connection', socket => {
 
   socket.on('new-connection', userName => {
     // console.log(userName + ' has entered the chat')
-    socket.broadcast.emit('new-user', userName);
+    userConnect(socket.id, userName);
+    socket.broadcast.emit('user', `${userName} has entered the chat!`);
   })
 
   socket.on('message', data => {
     io.sockets.emit('new-message', data)
   })
+
+  socket.on('typing', userName => {
+
+    socket.broadcast.emit('typing', userName);
+  })
+
+  socket.on("disconnect", () => {
+    const user = userDisconnect(socket.id)
+    io.sockets.emit('user', `${user.userName} has left the chat.`)
+
+  })
+
+  // socket.on('manual-logout', () => {
+  //   const user = userDisconnect(socket.id)
+  //   io.sockets.emit('user', `${user.userName} has left the chat.`)
+  // })
 
 })

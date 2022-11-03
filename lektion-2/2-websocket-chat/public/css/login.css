@@ -1,1 +1,9 @@
-@import "./default.css"
+@import "./default.css";
+
+.login-card {
+  max-width: 400px;
+}
+.headline {
+  font-size: 1.7rem;
+  margin: 1rem 0;
+}

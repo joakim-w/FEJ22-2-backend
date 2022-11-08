@@ -41,6 +41,27 @@ exports.getOneDishById = (req, res) => {
   })
 }
 
+/**
+ * GET: /api/dishes/random?amount=4
+ */
+exports.getRandomDishes = (req, res) => {
+  let amount = req.query.amount || 7;
+
+  Dish.find({}, (err, data) => {
+    if(err) {
+      return res.status(500).json({
+        message: 'Something went wrong when getting the dishes'
+      })
+    }
+
+    const random = data.sort(() => 0.5 - Math.random())
+    const dishes = random.slice(0, amount)
+
+    res.status(200).json(dishes)
+  })
+
+}
+
 
 /**
  * POST: /api/dishes

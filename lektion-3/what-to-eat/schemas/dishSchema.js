@@ -8,7 +8,11 @@ const dishSchema = mongoose.Schema({
   name: {
     type: String,
     required: true
-  }
+  },
+  // recipie: {
+  //      type: mongoose.Schema.Types.ObjectId,
+  //      ref: 'Recipie'
+  // }
 
 }, { timestamps: true })
 

@@ -1,13 +1,17 @@
 const router = require('express').Router();
+const dishModel = require('../models/dishModel');
 
+// Create
+router.post('/', dishModel.createNewDish);
 
-router.get('/', (req, res) => {
-  res.send('hej')
-})
+// Read
+router.get('/', dishModel.getAllDishes);
+router.get('/:id', dishModel.getOneDishById);
 
-router.post('/', (req, res) => {
-  res.send('post request')
-})
+// Update
+router.put('/:id', dishModel.updateDish);
 
+// Delete
+router.delete('/:id', dishModel.deleteDish);
 
 module.exports = router;

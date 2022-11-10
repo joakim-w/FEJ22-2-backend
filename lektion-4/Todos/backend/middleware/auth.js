@@ -14,8 +14,7 @@ exports.generateToken = (user) => {
 exports.verifyToken = (req, res, next) => {
   try {
     const token = req.headers.authorization.split(" ")[1];
-    req.userData = jwt.verify(token, secretKey);
-    console.log(payload);
+    req.userId = jwt.verify(token, secretKey).id;
     next()
   }
   catch {
